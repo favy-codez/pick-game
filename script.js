@@ -12,6 +12,9 @@ const current1 = document.getElementById('current--1');
 
 // initialize currentScore
 let currentScore = 0;
+// so we are storing the scores of both players in an array, NB-an array is zero-based.
+let scores = [0,0];
+let activePlayer = 0;
 
 // starting conditions
 diceEl.classList.add('hidden');
@@ -33,7 +36,11 @@ rollBtn.addEventListener('click', function(){
     if(dice !== 1){
         // when the dice = 1
         currentScore += dice;
+        // this will dynamically select score element based on the active player
+        document.getElementById(`current--{activePlayer}`).textContent = currentScore;
     }else{
-        // when the dice is not = 1
+        // when the dice is not = 1, switch to next player.
+        // if the active player is 0, then we want the new active player to be 1, else it should be 0.
+        activePlayer = activePlayer === 0 ? 1 : 0;
     }
 });

@@ -1,6 +1,8 @@
 'use strict';
 
 // selected elements for DOM manipulation
+const player0El =document.getElementById('player--0');
+const player1El =document.getElementById('player--1');
 const score0El = document.getElementById('score--0') ;
 const score1El = document.querySelector('#score--1') ;
 const diceEl = document.querySelector('.dice');
@@ -42,10 +44,12 @@ rollBtn.addEventListener('click', function(){
         // when the dice is not = 1, switch to next player.
         // so before we switch to next player, score should be 0
         document.getElementById(`current--${activePlayer}`).textContent = 0;
+        currentScore = 0;
         // if the active player is 0, then we want the new active player to be 1, else it should be 0.
         // so we want to swith between player 0 and 1 
         activePlayer = activePlayer === 0 ? 1 : 0;
         // we also want the score to switch bact to 0
-        currentScore = 0 ;
+        player0El.classList.toggle('player--active');
+        player1El.classList.toggle('player--active');
     }
 });

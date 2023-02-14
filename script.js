@@ -17,6 +17,8 @@ let currentScore = 0;
 // so we are storing the scores of both players in an array, NB-an array is zero-based.
 let scores = [0,0];
 let activePlayer = 0;
+// because at the beginning of the game we are indeed playing
+let playing = true;
 
 // starting conditions
 diceEl.classList.add('hidden');
@@ -33,7 +35,8 @@ const switchPlayer = function(){
 
 // add rollBtn functionality
 rollBtn.addEventListener('click', function(){
-    // 1 - generate a random number
+    if(playing){
+        // 1 - generate a random number
     const dice = Math.floor(Math.random() * 6) + 1;
     // we can also use Math.trunc instead of Math.floor to convert the decimal number to a whole number.
     console.log(dice);
@@ -59,24 +62,43 @@ rollBtn.addEventListener('click', function(){
         // currentScore = 0;
         // player0El.classList.toggle('player--active');
         // player1El.classList.toggle('player--active');
+
+        // the above code works but we need to turn it into a fxn since its reusable
         switchPlayer();
-    }
+        };
+    };
 });
 
 holdBtn.addEventListener('click', function(){
-    // add current score to active player's score
+    if(playing){
+        // add current score to active player's score
     scores[activePlayer] += currentScore;
     // so we want to change 0 and 1 dynamically
     document.getElementById(`score--${activePlayer}`).textContent = scores[activePlayer];
     scores[activePlayer];
 
     // if players score is >= 100
-    if(scores[activePlayer] >= 100){
+    if(scores[activePlayer] >= 20){
 
     };
     // finish the game
-    document.querySelector(`player ${activePlayer}`).classList.add('player--winner');
+    playing = false;
+    // remove dice
+    diceEl.classList.add('hidden');
+    document.querySelector(`.player--${activePlayer}`).classList.add('player--winner');
+    document.querySelector(`.player--${activePlayer}`).classList.remove('player--active');
 
     // switch to next player
     switchPlayer();
+    };
+});
+
+// reset btn
+newBtn.addEventListener('click', function(){
+    score0El.textContent = 0;
+    score1El.textContent = 0;
+    current0.textContent = 0;
+    current1.textContent = 0;
+    player0El.classList.remove('player--winner');
+    player1El.classList.remove('player--winner');
 });

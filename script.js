@@ -25,6 +25,27 @@ diceEl.classList.add('hidden');
 score0El.textContent = 0 ;
 score1El.textContent = 0 ;
 
+
+const init = function(){
+    currentScore = 0;
+    scores = [0,0];
+    activePlayer = 0;
+    playing = true;
+
+    score0El.textContent = 0;
+    score1El.textContent = 0;
+    current0.textContent = 0;
+    current1.textContent = 0;
+    diceEl.classList.add('hidden');
+    player0El.classList.remove('player--winner');
+    player1El.classList.remove('player--winner');
+    // make player one the active player
+    player0El.classList.add('player--active');
+    player1El.classList.remove('player--active');
+};
+
+init();
+
 const switchPlayer = function(){
     document.getElementById(`current--${activePlayer}`).textContent = 0;
     currentScore = 0;
@@ -80,7 +101,6 @@ holdBtn.addEventListener('click', function(){
     // if players score is >= 100
     if(scores[activePlayer] >= 20){
 
-    };
     // finish the game
     playing = false;
     // remove dice
@@ -90,15 +110,9 @@ holdBtn.addEventListener('click', function(){
 
     // switch to next player
     switchPlayer();
+};
     };
 });
 
 // reset btn
-newBtn.addEventListener('click', function(){
-    score0El.textContent = 0;
-    score1El.textContent = 0;
-    current0.textContent = 0;
-    current1.textContent = 0;
-    player0El.classList.remove('player--winner');
-    player1El.classList.remove('player--winner');
-});
+newBtn.addEventListener('click', init);

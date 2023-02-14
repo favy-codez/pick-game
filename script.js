@@ -67,5 +67,16 @@ holdBtn.addEventListener('click', function(){
     // add current score to active player's score
     scores[activePlayer] += currentScore;
     // so we want to change 0 and 1 dynamically
-    document.getElementById(`current--${activePlayer}`).textContent = scores[activePlayer];
+    document.getElementById(`score--${activePlayer}`).textContent = scores[activePlayer];
+    scores[activePlayer];
+
+    // if players score is >= 100
+    if(scores[activePlayer] >= 100){
+
+    };
+    // finish the game
+    document.querySelector(`player ${activePlayer}`).classList.add('player--winner');
+
+    // switch to next player
+    switchPlayer();
 });
